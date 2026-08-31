@@ -1,9 +1,18 @@
+import os
+import sys
+
 import pandas as pd
 import joblib
 
 
-# Load the trained model
-model = joblib.load("models/random_forest_model.pkl")
+# Load the trained model (best model selected automatically by train_model.py)
+if not os.path.exists("models/best_model.pkl") or not os.path.exists("models/scaler.pkl"):
+    sys.exit(
+        "\nERROR: Trained model/scaler not found in 'models/'.\n"
+        "Run 'python src/train_model.py' first.\n"
+    )
+
+model = joblib.load("models/best_model.pkl")
 
 # Load the scaler
 scaler = joblib.load("models/scaler.pkl")
@@ -40,6 +49,13 @@ def predict_transaction(transaction_data):
 
 
 # Test prediction using a real fraud transaction
+if not os.path.exists("data/creditcard.csv"):
+    sys.exit(
+        "\nERROR: 'data/creditcard.csv' not found.\n"
+        "Download it from https://www.kaggle.com/datasets/mlg-ulb/creditcardfraud "
+        "and place it inside the 'data/' folder.\n"
+    )
+
 df = pd.read_csv("data/creditcard.csv")
 df = df.drop_duplicates()
 
