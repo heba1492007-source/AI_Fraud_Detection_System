@@ -148,14 +148,17 @@ cd AI_Fraud_Detection_System
 
 # 2. Create a virtual environment (recommended)
 python -m venv venv
-source venv/bin/activate      # Windows: venv\Scripts\activate
+
+# Activate virtual environment:
+# - Windows (PowerShell): Set-ExecutionPolicy Bypass -Scope Process -Force; venv\Scripts\activate
+# - Windows (CMD):        venv\Scripts\activate.bat
+# - Mac / Linux:          source venv/bin/activate
 
 # 3. Install dependencies
 pip install -r requirements.txt
 
 # 4. Download the dataset (see data/README.md) and place it at:
 #    data/creditcard.csv
-```
 
 ## How to Run
 
